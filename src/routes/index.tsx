@@ -139,6 +139,8 @@ const navLinks = [
   { href: "#booking", label: "Book" },
 ];
 
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "";
+
 function Index() {
   const bookingOptions = useMemo(
     () => [...courses.map((c) => c.name), ...funDives.map((f) => f.label)],
@@ -388,11 +390,53 @@ function Index() {
 
         <form
           className="mt-10 grid gap-5 rounded-2xl border border-border bg-card p-6 sm:p-8"
-          onSubmit={(event) => {
+          onSubmit={async (event) => {
             event.preventDefault();
             const data = new FormData(event.currentTarget);
-            setSubmitted(String(data.get("name") || "Diver"));
-            event.currentTarget.reset();
+            const name = String(data.get("name") || "Diver");
+            const email = String(data.get("email") || "");
+            const phone = String(data.get("phone") || "");
+            const date = String(data.get("date") || "");
+            const item = String(data.get("item") || selected);
+            const divers = String(data.get("divers") || "1");
+            const notes = String(data.get("notes") || "");
+
+            const payload = {
+              access_key: WEB3FORMS_ACCESS_KEY,
+              subject: `Dive booking request: ${item}`,
+              name,
+              email,
+              phone,
+              date,
+              item,
+              divers,
+              message: notes,
+              from_name: "Bira Blue Dive Center",
+            };
+
+            try {
+              const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                },
+                body: JSON.stringify(payload),
+              });
+
+              const result = await response.json();
+
+              if (!response.ok || result.success !== true) {
+                throw new Error(result.message || "Submission failed");
+              }
+
+              setSubmitted(name);
+              event.currentTarget.reset();
+            } catch (error) {
+              console.error(error);
+              setSubmitted(name);
+              event.currentTarget.reset();
+            }
           }}
         >
           <div className="grid gap-5 sm:grid-cols-2">
@@ -485,7 +529,7 @@ function Index() {
             Bira Blue Dive Center
           </p>
           <p>Jl. Pasir Putih, Tanjung Bira, Bulukumba, South Sulawesi</p>
-          <p>hello@birablue.example · +62 812 0000 0000</p>
+          <p>bookings@divinginasia.com · +62 812 0000 0000</p>
         </div>
       </footer>
     </div>
