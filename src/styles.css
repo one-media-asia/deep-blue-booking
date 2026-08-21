@@ -163,3 +163,25 @@
     color: var(--color-foreground);
   }
 }
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility bg-deep {
+  background-image: var(--gradient-deep);
+}
+
+@utility bg-surf-gradient {
+  background-image: var(--gradient-surf);
+}
+
+@utility shadow-dive {
+  box-shadow: var(--shadow-dive);
+}
