@@ -162,9 +162,11 @@ function Index() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ocean-deep/80 backdrop-blur-md">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
           <a href="#top" className="flex items-center gap-2 text-primary-foreground">
-            <span className="grid size-9 place-items-center rounded-full bg-surf-gradient font-display text-sm font-bold text-ocean-deep">
-              BB
-            </span>
+            <img
+              src="https://api.divinginasia.com/images/logo.png"
+              alt="Bira Blue Dive Center logo"
+              className="h-10 w-auto object-contain"
+            />
             <span className="font-display text-base font-semibold leading-tight">
               Bira Blue
               <span className="block text-[11px] font-normal uppercase tracking-[0.2em] text-surf">
