@@ -413,7 +413,12 @@ function Index() {
           className="mt-10 grid gap-5 rounded-2xl border border-border bg-card p-6 sm:p-8"
           onSubmit={async (event) => {
             event.preventDefault();
-            const data = new FormData(event.currentTarget);
+            const form = event.currentTarget;
+            if (!form) {
+              return;
+            }
+
+            const data = new FormData(form);
             const name = String(data.get("name") || "Diver");
             const email = String(data.get("email") || "");
             const phone = String(data.get("phone") || "");
@@ -455,12 +460,12 @@ function Index() {
 
               setSubmitted(name);
               setFormState("success");
-              event.currentTarget.reset();
+              form.reset();
             } catch (error) {
               console.error(error);
               setSubmitted(name);
               setFormState("error");
-              event.currentTarget.reset();
+              form.reset();
             }
           }}
         >
