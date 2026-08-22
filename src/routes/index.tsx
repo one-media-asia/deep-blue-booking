@@ -9,7 +9,7 @@ import sitePinnacle from "@/assets/site-pinnacle.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Bira Blue Dive Center | PADI Courses & Diving in Tanjung Bira" },
+      { title: "Diving In Asia | PADI Courses & Diving in Tanjung Bira" },
       {
         name: "description",
         content:
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Bira Blue Dive Center | Diving in Tanjung Bira, Sulawesi",
+        content: "Diving In Asia | Diving in Tanjung Bira, Sulawesi",
       },
       {
         property: "og:description",
@@ -153,6 +153,7 @@ function Index() {
   const [selected, setSelected] = useState(bookingOptions[1]);
   const [submitted, setSubmitted] = useState<string | null>(null);
   const [formState, setFormState] = useState<"idle" | "success" | "error">("idle");
+  const [showPaypalModal, setShowPaypalModal] = useState(false);
 
   const selectedPrice = bookingPrices.find((item) => item.label === selected)?.price ?? 0;
   const depositAmount = selectedPrice * 0.1;
@@ -390,6 +391,44 @@ function Index() {
         </div>
       </section>
 
+      {showPaypalModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4">
+          <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-2xl">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-ocean">Payment</p>
+                <h3 className="mt-2 text-2xl font-bold">Pay now</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPaypalModal(false)}
+                className="rounded-full border border-border px-3 py-1 text-sm text-muted-foreground"
+              >
+                Close
+              </button>
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Choose your payment method and continue to PayPal to complete your booking.
+            </p>
+            <a
+              href="https://www.paypal.com/paypalme/prodivingasia/"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#0070ba] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90"
+            >
+              Pay with PayPal
+            </a>
+            <button
+              type="button"
+              onClick={() => setShowPaypalModal(false)}
+              className="mt-3 w-full rounded-full border border-border px-5 py-3 font-semibold text-foreground"
+            >
+              Continue booking form
+            </button>
+          </div>
+        </div>
+      )}
+
       <section id="booking" className="mx-auto max-w-3xl px-6 py-20">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-ocean">Reservations</p>
         <h2 className="mt-3 text-4xl font-bold">Book your dive</h2>
@@ -426,9 +465,14 @@ function Index() {
             const phone = String(data.get("phone") || "");
             const date = String(data.get("date") || "");
             const item = String(data.get("item") || selected);
-            const payment = String(data.get("payment") || "10% deposit");
+            const payment = String(data.get("payment") || "No deposit");
             const divers = String(data.get("divers") || "1");
             const notes = String(data.get("notes") || "");
+
+            if (payment === "Pay now" || payment === "Full payment") {
+              setShowPaypalModal(true);
+              return;
+            }
 
             const payload = {
               access_key: WEB3FORMS_ACCESS_KEY,
@@ -524,11 +568,12 @@ function Index() {
               Payment option
               <select
                 name="payment"
-                defaultValue="10% deposit"
+                defaultValue="No deposit"
                 className="rounded-lg border border-input bg-background px-3 py-2.5 text-base outline-none focus:border-ocean focus:ring-2 focus:ring-ring/30"
               >
-                <option value="Full payment">Full payment</option>
+                <option value="No deposit">No deposit</option>
                 <option value="10% deposit">10% deposit</option>
+                <option value="Pay now">Pay now</option>
               </select>
               <span className="text-xs text-muted-foreground">
                 10% deposit estimate: {rupiah(depositAmount)}
@@ -577,7 +622,7 @@ function Index() {
       <footer className="bg-ocean-deep py-10 text-primary-foreground/70">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 text-sm sm:flex-row sm:items-center sm:justify-between">
           <p className="font-display text-base font-semibold text-primary-foreground">
-            Bira Blue Dive Center
+            Diving In Asia
           </p>
           <p>Jl. Pasir Putih, Tanjung Bira, Bulukumba, South Sulawesi</p>
           <p>bookings@divinginasia.com · +62 8135383 3289</p>
