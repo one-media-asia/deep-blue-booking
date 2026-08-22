@@ -148,6 +148,7 @@ function Index() {
   );
   const [selected, setSelected] = useState(bookingOptions[1]);
   const [submitted, setSubmitted] = useState<string | null>(null);
+  const [formState, setFormState] = useState<"idle" | "success" | "error">("idle");
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -383,10 +384,20 @@ function Index() {
       <section id="booking" className="mx-auto max-w-3xl px-6 py-20">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-ocean">Reservations</p>
         <h2 className="mt-3 text-4xl font-bold">Book your dive</h2>
-        <p className="mt-4 text-muted-foreground">
-          Send your request and we confirm by email or WhatsApp within 24 hours. No prepayment needed —
-          settle at the shop.
-        </p>
+        <div className="mt-4 flex flex-col gap-3 text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            Send your request and we confirm by email or WhatsApp within 24 hours. No prepayment needed —
+            settle at the shop.
+          </p>
+          <a
+            href="https://wa.me/6281200000000?text=Hi%20Bira%20Blue%20Dive%20Center%2C%20I%20want%20to%20book%20a%20dive."
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-600"
+          >
+            WhatsApp us
+          </a>
+        </div>
 
         <form
           className="mt-10 grid gap-5 rounded-2xl border border-border bg-card p-6 sm:p-8"
@@ -431,10 +442,12 @@ function Index() {
               }
 
               setSubmitted(name);
+              setFormState("success");
               event.currentTarget.reset();
             } catch (error) {
               console.error(error);
               setSubmitted(name);
+              setFormState("error");
               event.currentTarget.reset();
             }
           }}
@@ -515,9 +528,14 @@ function Index() {
           >
             Send booking request
           </button>
-          {submitted && (
-            <p className="rounded-lg bg-secondary px-4 py-3 text-sm text-secondary-foreground">
+          {submitted && formState === "success" && (
+            <p className="rounded-lg bg-emerald-500/10 px-4 py-3 text-sm text-emerald-700 dark:text-emerald-300">
               Thanks {submitted}! Your request is noted — we'll confirm availability within 24 hours.
+            </p>
+          )}
+          {submitted && formState === "error" && (
+            <p className="rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-700 dark:text-red-300">
+              We couldn’t send your request right now. Please email bookings@divinginasia.com or use WhatsApp to send your booking directly.
             </p>
           )}
         </form>
