@@ -168,9 +168,9 @@ function Index() {
               className="h-10 w-auto object-contain"
             />
             <span className="font-display text-base font-semibold leading-tight">
-              Bira Blue
+              Diving In Asia
               <span className="block text-[11px] font-normal uppercase tracking-[0.2em] text-surf">
-                Dive Center
+                Bira Blue
               </span>
             </span>
           </a>
