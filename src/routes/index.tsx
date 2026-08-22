@@ -165,14 +165,11 @@ function Index() {
           <a href="#top" className="flex items-center gap-2 text-primary-foreground">
             <img
               src="https://api.divinginasia.com/images/logo.png"
-              alt="Bira Blue Dive Center logo"
-              className="h-10 w-auto object-contain"
+              alt="Diving In Asia logo"
+              className="h-12 w-auto object-contain"
             />
-            <span className="font-display text-base font-semibold leading-tight">
+            <span className="font-display text-lg font-semibold leading-tight text-primary-foreground">
               Diving In Asia
-              <span className="block text-[11px] font-normal uppercase tracking-[0.2em] text-surf">
-                Bira Blue
-              </span>
             </span>
           </a>
           <ul className="hidden items-center gap-7 md:flex">
