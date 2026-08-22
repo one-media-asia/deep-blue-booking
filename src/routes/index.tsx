@@ -485,7 +485,7 @@ function Index() {
               payment,
               divers,
               message: [`Payment option: ${payment}`, `Certification level & notes: ${notes}`].join("\n"),
-              from_name: "Bira Blue Dive Center",
+              from_name: "Diving In Asia",
             };
 
             try {
@@ -620,10 +620,18 @@ function Index() {
       </section>
 
       <footer className="bg-ocean-deep py-10 text-primary-foreground/70">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 text-sm sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-display text-base font-semibold text-primary-foreground">
-            Diving In Asia
-          </p>
+        <div className="mx-auto flex max-w-6xl flex-col gap-5 px-6 text-sm sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            <img
+              src="https://api.divinginasia.com/images/logo.png"
+              alt="Diving In Asia logo"
+              className="h-10 w-auto object-contain"
+            />
+            <div>
+              <p className="font-display text-base font-semibold text-primary-foreground">Diving In Asia</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-surf">PADI courses & fun dives</p>
+            </div>
+          </div>
           <p>Jl. Pasir Putih, Tanjung Bira, Bulukumba, South Sulawesi</p>
           <p>bookings@divinginasia.com · +62 8135383 3289</p>
         </div>
