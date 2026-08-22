@@ -398,6 +398,9 @@ function Index() {
             WhatsApp us
           </a>
         </div>
+        <p className="mt-3 rounded-lg border border-amber-500/30 bg-amber-500/5 px-4 py-3 text-sm text-amber-700 dark:text-amber-300">
+          Deposit option available: pay 10% now and settle the remaining balance before or on arrival.
+        </p>
 
         <form
           className="mt-10 grid gap-5 rounded-2xl border border-border bg-card p-6 sm:p-8"
@@ -409,6 +412,7 @@ function Index() {
             const phone = String(data.get("phone") || "");
             const date = String(data.get("date") || "");
             const item = String(data.get("item") || selected);
+            const payment = String(data.get("payment") || "10% deposit");
             const divers = String(data.get("divers") || "1");
             const notes = String(data.get("notes") || "");
 
@@ -420,8 +424,9 @@ function Index() {
               phone,
               date,
               item,
+              payment,
               divers,
-              message: notes,
+              message: [`Payment option: ${payment}`, `Certification level & notes: ${notes}`].join("\n"),
               from_name: "Bira Blue Dive Center",
             };
 
@@ -499,6 +504,17 @@ function Index() {
                     {option}
                   </option>
                 ))}
+              </select>
+            </label>
+            <label className="grid gap-2 text-sm font-medium">
+              Payment option
+              <select
+                name="payment"
+                defaultValue="10% deposit"
+                className="rounded-lg border border-input bg-background px-3 py-2.5 text-base outline-none focus:border-ocean focus:ring-2 focus:ring-ring/30"
+              >
+                <option value="Full payment">Full payment</option>
+                <option value="10% deposit">10% deposit</option>
               </select>
             </label>
             <label className="grid gap-2 text-sm font-medium">
