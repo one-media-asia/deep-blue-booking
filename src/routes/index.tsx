@@ -146,9 +146,16 @@ function Index() {
     () => [...courses.map((c) => c.name), ...funDives.map((f) => f.label)],
     [],
   );
+  const bookingPrices = useMemo(
+    () => [...courses.map((c) => ({ label: c.name, price: c.price })), ...funDives.map((f) => ({ label: f.label, price: f.price }))],
+    [],
+  );
   const [selected, setSelected] = useState(bookingOptions[1]);
   const [submitted, setSubmitted] = useState<string | null>(null);
   const [formState, setFormState] = useState<"idle" | "success" | "error">("idle");
+
+  const selectedPrice = bookingPrices.find((item) => item.label === selected)?.price ?? 0;
+  const depositAmount = selectedPrice * 0.1;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -516,6 +523,9 @@ function Index() {
                 <option value="Full payment">Full payment</option>
                 <option value="10% deposit">10% deposit</option>
               </select>
+              <span className="text-xs text-muted-foreground">
+                10% deposit estimate: {rupiah(depositAmount)}
+              </span>
             </label>
             <label className="grid gap-2 text-sm font-medium">
               Divers
