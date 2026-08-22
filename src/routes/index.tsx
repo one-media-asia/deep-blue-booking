@@ -390,7 +390,7 @@ function Index() {
             settle at the shop.
           </p>
           <a
-            href="https://wa.me/6281200000000?text=Hi%20Bira%20Blue%20Dive%20Center%2C%20I%20want%20to%20book%20a%20dive."
+            href="https://wa.me/6281353833289?text=Hi%20Bira%20Blue%20Dive%20Center%2C%20I%20want%20to%20book%20a%20dive."
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-600"
@@ -547,7 +547,7 @@ function Index() {
             Bira Blue Dive Center
           </p>
           <p>Jl. Pasir Putih, Tanjung Bira, Bulukumba, South Sulawesi</p>
-          <p>bookings@divinginasia.com · +62 812 0000 0000</p>
+          <p>bookings@divinginasia.com · +62 8135383 3289</p>
         </div>
       </footer>
     </div>
