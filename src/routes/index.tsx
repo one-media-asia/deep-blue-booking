@@ -168,7 +168,7 @@ function Index() {
               alt="Diving In Asia logo"
               className="h-12 w-auto object-contain"
             />
-            <span className="font-display text-lg font-semibold leading-tight text-white/70">
+            <span className="font-display text-lg font-semibold leading-tight text-white/55">
               Diving In Asia
             </span>
           </a>
